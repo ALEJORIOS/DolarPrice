@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script time='<%= Time %>' , price='<%= Price %>'>
+        // <block:setup:1>
+        var time = document.currentScript.getAttribute("time").split(',');
+        var price = document.currentScript.getAttribute("price").split(',');
+
+        const labels = time;
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Dollar price in cop',
+                backgroundColor: 'rgb(0, 175, 255)',
+                borderColor: 'rgb(0, 175, 255)',
+                data: price
+
+            }]
+        };
+        // </block:setup>
+
+        // <block:config:0>
+        const config = {
+            type: 'line',
+            data,
+            options: {
+                scales: {
+                    y: {
+                        ticks: {
+                            // Include a dollar sign in the ticks
+                            callback: function(value, index, values) {
+                                return value + ' COP';
+                            }
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    <script>
+        // === include 'setup' then 'config' above ===
+
+        var myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+
+</body>
+
+</html>
