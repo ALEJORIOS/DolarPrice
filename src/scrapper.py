@@ -10,6 +10,7 @@ elements = soup.find_all('td', class_='tabla_historico-periodos_td')
 elementsList = [i.text for i in elements]
 
 Hour = [elementsList[i] for i in range(0, len(elements), 2)]
+Hour.reverse()
 price_string = [elementsList[i] for i in range(1, len(elements), 2)]
 
 price_comma = [i[6:14] for i in price_string]
